@@ -1,97 +1,180 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# KK Badge To Coin Animation
 
-# Getting Started
+A React Native project showcasing complex animations featuring a badge-to-coin transformation with multi-phase animation sequences.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🚀 Project Overview
 
-## Step 1: Start Metro
+This project demonstrates advanced React Native animation capabilities, featuring:
+- **Multi-phase animation sequence**: Badge spin/fade → coin movement → cross-fade transitions
+- **Drawer slide-up animation** with lightbox overlay
+- **SVG integration** with custom animated components
+- **Complex timing sequences** with synchronized animations
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🛠 Tech Stack & Dependencies
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Core Framework
+- **[React Native 0.81.4](https://reactnative.dev)** - Cross-platform mobile development framework
+- **[TypeScript 5.8.3](https://www.typescriptlang.org/)** - Type-safe JavaScript development
+- **[React 19.1.0](https://reactjs.org/)** - UI library
 
-```sh
-# Using npm
+### Animation Libraries
+- **[React Native Reanimated 4.1.0](https://docs.swmansion.com/react-native-reanimated/)** - High-performance animations and gestures
+  - Used for: Complex timing animations, shared values, animated styles
+  - Features: `useSharedValue`, `useAnimatedStyle`, `withTiming`, custom easing
+- **[React Native Worklets 0.5.1](https://github.com/margelo/react-native-worklets)** - JavaScript worklets for smooth animations
+  - Required by React Native Reanimated for optimal performance
+
+### UI & Styling
+- **[Styled Components 6.1.19](https://styled-components.com/)** - CSS-in-JS styling library
+  - Used for: Component-based styling with TypeScript support
+- **[React Native Safe Area Context 5.5.2](https://github.com/th3rdwave/react-native-safe-area-context)** - Safe area handling
+  - Used for: Proper layout handling across different device screens
+
+### SVG Support
+- **[React Native SVG 15.13.0](https://github.com/software-mansion/react-native-svg)** - SVG rendering support
+  - Used for: Rendering silverToken.svg and 2DayStreak.svg components
+- **[React Native SVG Transformer 1.5.1](https://github.com/kristerkari/react-native-svg-transformer)** - SVG import transformer
+  - Used for: Direct SVG imports as React components with TypeScript support
+
+## 🎯 Key Animation Features
+
+### Animation Sequence
+1. **Initial State**: Drawer slides up from bottom with lightbox fade-in (700ms)
+2. **Badge Animation**: 2DayStreak spins 260° and fades out (700ms)
+3. **Delay**: 1.5 second pause
+4. **Coin Animation**: SilverToken moves to top-right corner and scales down (700ms)
+5. **Final Transition**: Coin fades out, badge fades back in (300ms each)
+
+### Technical Implementation
+- **Shared Values**: Independent animation state management
+- **Timing Functions**: Custom easing with `Easing.inOut(Easing.quad)`
+- **Animated Components**: SVG components wrapped with `Animated.createAnimatedComponent`
+- **Layering**: Proper z-index and absolute positioning for complex layouts
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js >= 20
+- React Native development environment set up ([guide](https://reactnative.dev/docs/set-up-your-environment))
+- For iOS: Xcode and CocoaPods
+- For Android: Android Studio and Android SDK
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/johndrach/KK-Badge-To-Coin-Animation.git
+   cd KK-Badge-To-Coin-Animation
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **iOS Setup** (iOS only)
+   ```bash
+   # Install Ruby dependencies
+   bundle install
+
+   # Install CocoaPods dependencies
+   bundle exec pod install
+   ```
+
+### Running the App
+
+#### Start Metro
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+#### iOS
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+#### Android
+```bash
+npm run android
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 📱 App Structure
 
-## Step 3: Modify your app
+### Main Components
+- **App.tsx** - Main application component with animation logic
+- **AppContent** - Core animation implementation
+- **AnimatedSilverToken** - Animated SVG coin component
+- **AnimatedTwoDayStreak** - Animated SVG badge component
 
-Now that you have successfully run the app, let's make changes!
+### Key Animation Functions
+- **`startAnimation()`** - Triggers the complete animation sequence
+- **`resetAnimation()`** - Resets all animations to initial state
+- **`initializeDrawer()`** - Initial drawer and lightbox animation
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### Assets
+- `assets/images/silverToken.svg` - Coin SVG graphic
+- `assets/images/2DayStreak.svg` - Badge SVG graphic
+- `assets/images/drawer.png` - Background drawer image
+- `assets/images/background.jpg` - App background image
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 🔧 Configuration Files
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### Babel Configuration (`babel.config.js`)
+```javascript
+module.exports = {
+  presets: ['@react-native/babel-preset'],
+  plugins: ['react-native-worklets/plugin'], // Required for Reanimated
+};
+```
 
-## Congratulations! :tada:
+### Metro Configuration (`metro.config.js`)
+```javascript
+// Configured for SVG transformer support
+const {transformer, resolver} = require('react-native-svg-transformer');
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+### TypeScript Configuration
+- **`react-native-svg.d.ts`** - SVG import declarations
+- **`tsconfig.json`** - TypeScript compiler configuration
 
-### Now what?
+## 🎮 User Interactions
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- **Invisible Collect Button**: Tap the bottom area of the drawer to trigger animation
+- **Reset Button**: Red button in top-left corner to reset animation state
 
-# Troubleshooting
+## 🏗 Development
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Available Scripts
+- `npm start` - Start Metro bundler
+- `npm run ios` - Run iOS app
+- `npm run android` - Run Android app
+- `npm run lint` - Run ESLint
+- `npm test` - Run Jest tests
 
-# Learn More
+### Code Style
+- **ESLint** configuration with React Native rules
+- **Prettier** for code formatting
+- **TypeScript** for type safety
 
-To learn more about React Native, take a look at the following resources:
+## 📚 Learning Resources
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [React Native Reanimated Documentation](https://docs.swmansion.com/react-native-reanimated/)
+- [React Native SVG Documentation](https://github.com/software-mansion/react-native-svg)
+- [Styled Components Documentation](https://styled-components.com/docs)
+- [React Native Animation Guide](https://reactnative.dev/docs/animations)
+
+## 🤝 Contributing
+
+This project demonstrates advanced React Native animation patterns and serves as a reference for:
+- Complex multi-phase animations
+- SVG integration in React Native
+- Performance-optimized animations with Reanimated
+- TypeScript integration with React Native
+
+## 📄 License
+
+This project was created for demonstration purposes and learning.
+
+---
+
+Built with ❤️ using React Native and advanced animation libraries.
